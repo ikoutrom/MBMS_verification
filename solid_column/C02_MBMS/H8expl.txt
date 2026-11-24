@@ -1,0 +1,52 @@
+STRESS
+
+NCPUS 8
+
+LARGE DEFORMATIONS
+   
+MATERIAL 1
+ELASTIC
+28985.5 0.3 0. 0. 0. 0.   ! define material parameters
+DENSITY
+7.5e-7
+END
+ 			  
+MATERIAL 2
+STEEL3D
+28985.5, 0.3, 11600., 19333., 50., 0., 50., 0.    ! E,v,G,Kvol,sY0,Hiso,beta,notinuse
+0., 4.50, 0., 0., 0., 0., 0., 0.             ! C1, gama1, C2, gama2, notinuse,notinuse,notinuse,notinuse
+0., 0.5, 0., 0., 1., 0.5, 0.15, 0.14           ! Dam-law, Dcr,	S,t,aM,bM,aCVGM,bCVGM
+0.05, 0.06, 0., 0., 1., 0., 0.15, 0.14          ! a1C,a2C,notinuse,notinuse,c3M,notinuse,notinuse,GF
+DENSITY
+7.34251e-7
+END
+ 			  
+SECTION 1
+SOLID
+MATERIAL 2 
+SELREDUCED
+END
+
+SECTION 2
+SOLID
+ACM
+END
+
+LSPREPOST
+expl8Hcirc.k
+
+ENDDA
+
+SOLVER 
+DYNAMIC EXPLICIT
+DTPR 0.01
+TERMINATE 4.0
+FDTAC 20.		! this is the timestep multiplier that we want to use with ACM!
+ACMREM
+END
+
+  
+
+
+
+                  
