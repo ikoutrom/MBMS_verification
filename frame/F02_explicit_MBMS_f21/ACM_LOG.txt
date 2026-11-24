@@ -1,0 +1,10 @@
+  
+ *** Auxiliary Coarse Mesh   S E T U P ***
+ time =   0.000000000000000E+000
+  
+       19983  Nodes embedded in the ACM
+  
+ **********    END OF Aux. Coarse Mesh DATA ****** *****************************
+ ***********************************
+  
+  
