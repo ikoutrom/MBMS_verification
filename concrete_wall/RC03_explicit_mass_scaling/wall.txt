@@ -1,0 +1,74 @@
+STRESS
+
+NCPUS 8
+
+REDOUT
+
+LARGE DEFORMATION
+
+MATERIAL 1
+CONMRMG
+BASIC
+5000.,0.18, 5. 0.0025 0.1 0.5 0.02 -0.0006 1.   	!E, v, fc, e0, fcres/fc, ft, ftres/ft, Gf1, sig0 ! (NOTE: negative Gf1 means that we set NEGATIVE Gc = 100*Gf1!)
+COMPRESSION 3.5 -0.05 ! fc0, Gc (if we want to manually give specific values!)
+DENSITY 
+1.44e-4
+END
+
+MATERIAL 2
+ELASTIC
+5000. 0.18 0. 0. 0. 0.   ! define material parameters
+DENSITY 
+1.44e-4
+END
+
+MATERIAL 3
+STEELDR
+29000.0,0.3,11153.8,24167.0,8.0,0.0,0.0,0.0   ! E, v, G, Kvol, notinuse,notinuse,notinuse,notinuse
+0.01,68.,0.05,90.,0.11,95.,0.,0.         ! epsSH,fy,eSH1,fSH1,epsU,fsU,notinuse,notinuse
+-1.,1.0,100.,0.0,0.0,0.0,0.0,0.0              ! Spar, tpar, Dcr
+DENSITY 
+4.32e-4
+END
+
+SECTI 1 
+SOLID
+MATERIAL 1
+END
+
+SECTI 2 
+SOLID
+MATERIAL 2 
+END
+
+SECTION 3		! #5 bars
+TRUSS
+MATERIAL 3 
+SECAREA 0.31
+SECSHAPE CIRCULAR	! This is to determine the shape of the section when drawn in prepost: RECTANGLE, CIRCULAR, HOLLOWC, HOLLOWR, SPRING, DAMPER, ISECTION, HSECTION, ZSECTION, LSECTION, USESCTION, CSECTION, BSECTION
+END
+
+SECTION 4 
+SOLID
+MATERIAL 1
+BIRTH 100.
+END
+
+LSPREPOST
+rcwall.k
+
+DAMPING 0.2 2.e-7
+
+ENDDA
+
+SOLVER
+DT 0.01
+DTPR 0.01
+TERMINATE 4.12
+MAXITER 1000
+ITERATION INITIAL
+TOLERANCE 0.005
+RELATIVE
+SWITCH 0.11
+DYNAMIC EXPLICIT
+END
